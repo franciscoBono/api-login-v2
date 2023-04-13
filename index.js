@@ -1,11 +1,16 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import fs from 'fs'
+import cors from 'cors'
 
 const RSA_PRIVATE_KEY = fs.readFileSync("./keys/private.key")
 const RSA_PUBLIC_KEY = fs.readFileSync("./keys/public.key")
 
 const app = express()
+app.use(cors([{
+    origin: "*",
+    credentials: true
+}]))
 
 app.post("/token", (req, res) => {
     //Get user from BD, check email, password, etc

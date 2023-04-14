@@ -22,8 +22,8 @@ app.post("/token", (req, res) => {
 app.get("/verify", (req, res) => {
     try {
         const token = req.headers.authorization.split(" ")[1]
-        const payload = jwt.verify(token, RSA_PUBLIC_KEY)
-        res.send("token verified")
+        jwt.verify(token, RSA_PUBLIC_KEY)
+        res.send({foo: 'token verified'})  
     } catch (error) {
         res.status(401).send({error: error.message})
     }
